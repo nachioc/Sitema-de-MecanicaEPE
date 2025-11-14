@@ -41,9 +41,9 @@ Partial Class LoginForm
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.Snow
-        Label1.Location = New Point(478, 67)
+        Label1.Location = New Point(546, 89)
         Label1.Name = "Label1"
-        Label1.Size = New Size(36, 15)
+        Label1.Size = New Size(47, 20)
         Label1.TabIndex = 0
         Label1.Text = "Email"
         ' 
@@ -52,33 +52,35 @@ Partial Class LoginForm
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label2.ForeColor = Color.Snow
-        Label2.Location = New Point(478, 126)
+        Label2.Location = New Point(546, 168)
         Label2.Name = "Label2"
-        Label2.Size = New Size(69, 15)
+        Label2.Size = New Size(88, 20)
         Label2.TabIndex = 1
         Label2.Text = "Contraseña"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(332, 141)
+        Label3.Location = New Point(379, 188)
         Label3.Name = "Label3"
-        Label3.Size = New Size(41, 15)
+        Label3.Size = New Size(53, 20)
         Label3.TabIndex = 3
         Label3.Text = "Label3"
         ' 
         ' txtEmail
         ' 
-        txtEmail.Location = New Point(478, 85)
+        txtEmail.Location = New Point(546, 113)
+        txtEmail.Margin = New Padding(3, 4, 3, 4)
         txtEmail.Name = "txtEmail"
-        txtEmail.Size = New Size(190, 23)
+        txtEmail.Size = New Size(217, 27)
         txtEmail.TabIndex = 5
         ' 
         ' txtPassword
         ' 
-        txtPassword.Location = New Point(478, 144)
+        txtPassword.Location = New Point(546, 192)
+        txtPassword.Margin = New Padding(3, 4, 3, 4)
         txtPassword.Name = "txtPassword"
-        txtPassword.Size = New Size(190, 23)
+        txtPassword.Size = New Size(217, 27)
         txtPassword.TabIndex = 6
         ' 
         ' btnLogin
@@ -86,9 +88,10 @@ Partial Class LoginForm
         btnLogin.BackColor = SystemColors.Highlight
         btnLogin.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnLogin.ForeColor = SystemColors.ButtonHighlight
-        btnLogin.Location = New Point(527, 225)
+        btnLogin.Location = New Point(602, 300)
+        btnLogin.Margin = New Padding(3, 4, 3, 4)
         btnLogin.Name = "btnLogin"
-        btnLogin.Size = New Size(88, 34)
+        btnLogin.Size = New Size(101, 45)
         btnLogin.TabIndex = 7
         btnLogin.Text = "Iniciar sesion"
         btnLogin.UseVisualStyleBackColor = False
@@ -102,10 +105,9 @@ Partial Class LoginForm
         ' PictureBox1
         ' 
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(27, 67)
-        PictureBox1.Margin = New Padding(3, 2, 3, 2)
+        PictureBox1.Location = New Point(31, 89)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(351, 254)
+        PictureBox1.Size = New Size(401, 339)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 8
         PictureBox1.TabStop = False
@@ -116,18 +118,18 @@ Partial Class LoginForm
         Label4.BackColor = SystemColors.ActiveCaptionText
         Label4.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label4.ForeColor = SystemColors.ButtonFace
-        Label4.Location = New Point(186, 14)
+        Label4.Location = New Point(213, 19)
         Label4.Name = "Label4"
-        Label4.Size = New Size(340, 32)
+        Label4.Size = New Size(417, 41)
         Label4.TabIndex = 9
         Label4.Text = "Bienvenid@ a Mecanica Plus"
         ' 
         ' LoginForm
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ActiveCaptionText
-        ClientSize = New Size(716, 392)
+        ClientSize = New Size(818, 523)
         Controls.Add(Label4)
         Controls.Add(PictureBox1)
         Controls.Add(btnLogin)
@@ -136,6 +138,7 @@ Partial Class LoginForm
         Controls.Add(Label3)
         Controls.Add(Label2)
         Controls.Add(Label1)
+        Margin = New Padding(3, 4, 3, 4)
         Name = "LoginForm"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"

@@ -10,8 +10,6 @@ Public Class FormVentasRepuestos
         Instance = Me
         CargarRepuestos()
     End Sub
-
-    ' Mostrar todos los repuestos
     Private Sub CargarRepuestos()
         Using conn As MySqlConnection = ObtenerConexion()
             Dim sql As String = "SELECT RepuestoID, NombreRepuesto, CantidadStock, PrecioUnitario, Proveedor FROM repuestos"
@@ -22,7 +20,6 @@ Public Class FormVentasRepuestos
         End Using
     End Sub
 
-    ' Buscar por ID o nombre
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Using conn As MySqlConnection = ObtenerConexion()
             Dim sql As String = "SELECT RepuestoID, NombreRepuesto, CantidadStock, PrecioUnitario, Proveedor FROM repuestos WHERE RepuestoID LIKE @buscar OR NombreRepuesto LIKE @buscar"
@@ -34,13 +31,9 @@ Public Class FormVentasRepuestos
             dgvRepuestos.DataSource = dt
         End Using
     End Sub
-
-    ' Ver todos
     Private Sub btnVerTodo_Click(sender As Object, e As EventArgs) Handles btnVerTodo.Click
         CargarRepuestos()
     End Sub
-
-    ' Seleccionar repuesto desde la tabla
     Private Sub dgvRepuestos_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvRepuestos.CellClick
         If e.RowIndex >= 0 Then
             Dim fila As DataGridViewRow = dgvRepuestos.Rows(e.RowIndex)
@@ -49,7 +42,6 @@ Public Class FormVentasRepuestos
         End If
     End Sub
 
-    ' Calcular total automáticamente
     Private Sub txtCantidad_TextChanged(sender As Object, e As EventArgs) Handles txtCantidad.TextChanged
         Dim precio As Decimal
         Dim cantidad As Integer
@@ -60,8 +52,6 @@ Public Class FormVentasRepuestos
             txtTotalPagar.Clear()
         End If
     End Sub
-
-    ' Confirmar compra
     Private Sub btnConfirmarCompra_Click(sender As Object, e As EventArgs) Handles btnConfirmarCompra.Click
         If String.IsNullOrWhiteSpace(txtNombreRepuesto.Text) OrElse
            String.IsNullOrWhiteSpace(txtCantidad.Text) OrElse
@@ -75,7 +65,7 @@ Public Class FormVentasRepuestos
             Dim trans As MySqlTransaction = conn.BeginTransaction()
 
             Try
-                ' 1️⃣ Insertar venta
+
                 Dim insertVenta As String = "INSERT INTO ventasrepuestos (NombreRepuesto, CantidadVendida, Cliente , FechaVenta, Total) " &
                            "VALUES (@nombre, @cantidad, @cliente, @fecha, @total)"
                 Dim cmdInsert As New MySqlCommand(insertVenta, conn, trans)
@@ -86,7 +76,6 @@ Public Class FormVentasRepuestos
                 cmdInsert.Parameters.AddWithValue("@total", Decimal.Parse(txtTotalPagar.Text))
                 cmdInsert.ExecuteNonQuery()
 
-                ' 2️⃣ Actualizar stock
                 Dim updateStock As String = "UPDATE repuestos SET CantidadStock = CantidadStock - @cantidad WHERE NombreRepuesto = @nombre AND CantidadStock >= @cantidad"
                 Dim cmdUpdate As New MySqlCommand(updateStock, conn, trans)
                 cmdUpdate.Parameters.AddWithValue("@cantidad", Integer.Parse(txtCantidad.Text))
@@ -118,11 +107,11 @@ Public Class FormVentasRepuestos
         txtTotalPagar.Clear()
     End Sub
     Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
-        ' Mostrar el menú principal si está disponible
+
         If MainMenu.Instance IsNot Nothing AndAlso Not MainMenu.Instance.IsDisposed Then
             MainMenu.Instance.Show()
         Else
-            ' Si por alguna razón no existe, crear uno nuevo
+
             Dim menu As New MainMenu()
             MainMenu.Instance = menu
             menu.Show()

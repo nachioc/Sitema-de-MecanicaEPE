@@ -5,26 +5,21 @@ Public Class FormGestionRepuestos
     Public Sub New()
         InitializeComponent()
     End Sub
-
-    ' ---------- LOAD ----------
     Private Sub FormGestionRepuestos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.StartPosition = FormStartPosition.CenterScreen
 
-        ' Mostrar por defecto el panel de Búsqueda/Visualizar
         MostrarPanel(pnlBuscar)
 
-        ' Cargar datos
         MostrarRepuestos()
     End Sub
 
-    ' ---------- NAVEGACIÓN ENTRE PANELES ----------
     Private Sub MostrarPanel(panelActivo As Panel)
-        ' Ocultar todos
+
         pnlBuscar.Visible = False
         pnlAgregar.Visible = False
         pnlModificarEliminar.Visible = False
 
-        ' Mostrar el que corresponde
+
         panelActivo.Visible = True
         panelActivo.BringToFront()
     End Sub
@@ -41,7 +36,6 @@ Public Class FormGestionRepuestos
         MostrarPanel(pnlModificarEliminar)
     End Sub
 
-    ' Hover para botones de la navbar (ajusta si agregas más)
     Private Sub NavButton_MouseEnter(sender As Object, e As EventArgs) Handles btnBuscarPanel.MouseEnter, btnAgregarPanel.MouseEnter, btnModificarPanel.MouseEnter
         CType(sender, Button).BackColor = Color.Orange
     End Sub
@@ -49,7 +43,6 @@ Public Class FormGestionRepuestos
         CType(sender, Button).BackColor = Color.Black
     End Sub
 
-    ' ---------- MOSTRAR / VISUALIZAR ----------
     Private Sub MostrarRepuestos()
         Try
             Using conn As MySqlConnection = ObtenerConexion()
@@ -64,13 +57,11 @@ Public Class FormGestionRepuestos
         End Try
     End Sub
 
-    ' Botón Visualizar (muestra todo en dgvBuscar)
     Private Sub btnVisualizar_Click(sender As Object, e As EventArgs) Handles btnVisualizar.Click
         MostrarRepuestos()
         MostrarPanel(pnlBuscar)
     End Sub
 
-    ' ---------- BUSCAR ----------
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
             Using conn As MySqlConnection = ObtenerConexion()
@@ -94,7 +85,6 @@ Public Class FormGestionRepuestos
         End Try
     End Sub
 
-    ' Si se hace click en una fila, cargamos datos en panel Modificar/Eliminar (útil para editar rápido)
     Private Sub dgvBuscar_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvBuscar.CellClick
         If e.RowIndex < 0 Then Return
         Dim row = dgvBuscar.Rows(e.RowIndex)
@@ -103,13 +93,11 @@ Public Class FormGestionRepuestos
         txtCantidadModificar.Text = row.Cells("CantidadStock").Value.ToString()
         txtPrecioModificar.Text = row.Cells("PrecioUnitario").Value.ToString()
         txtProveedorModificar.Text = row.Cells("Proveedor").Value.ToString()
-        ' Mostrar panel modificar para facilitar la edición (opcional)
         MostrarPanel(pnlModificarEliminar)
     End Sub
 
-    ' ---------- AGREGAR ----------
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
-        ' Validaciones básicas y conversión
+
         If String.IsNullOrWhiteSpace(txtNombreAgregar.Text) OrElse String.IsNullOrWhiteSpace(txtCantidadAgregar.Text) OrElse String.IsNullOrWhiteSpace(txtPrecioAgregar.Text) OrElse String.IsNullOrWhiteSpace(txtProveedorAgregar.Text) Then
             MessageBox.Show("Complete todos los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -152,8 +140,6 @@ Public Class FormGestionRepuestos
         txtPrecioAgregar.Clear()
         txtProveedorAgregar.Clear()
     End Sub
-
-    ' ---------- MODIFICAR ----------
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
         If String.IsNullOrWhiteSpace(txtIDModificar.Text) Then
             MessageBox.Show("Ingrese ID a modificar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -166,7 +152,6 @@ Public Class FormGestionRepuestos
             Return
         End If
 
-        ' Leemos los valores actuales y usamos los nuevos solo si el usuario escribió algo (para no borrar con blancos)
         Try
             Using conn As MySqlConnection = ObtenerConexion()
                 conn.Open()
@@ -185,7 +170,6 @@ Public Class FormGestionRepuestos
                 Dim proveedorActual = reader("Proveedor").ToString()
                 reader.Close()
 
-                ' Si el usuario dejó vacío un campo, conservamos el valor anterior
                 Dim nuevoNombre = If(String.IsNullOrWhiteSpace(txtNombreModificar.Text), nombreActual, txtNombreModificar.Text.Trim())
                 Dim nuevoCantidad As Integer = cantidadActual
                 Dim nuevoPrecio As Decimal = precioActual
@@ -215,7 +199,6 @@ Public Class FormGestionRepuestos
         End Try
     End Sub
 
-    ' ---------- ELIMINAR (con confirmación personalizada) ----------
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         If String.IsNullOrWhiteSpace(txtIDModificar.Text) Then
             MessageBox.Show("Ingrese ID a eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -228,7 +211,6 @@ Public Class FormGestionRepuestos
             Return
         End If
 
-        ' Obtener nombre para mostrar en confirmación
         Dim nombre As String = ""
         Try
             Using conn As MySqlConnection = ObtenerConexion()
@@ -246,7 +228,6 @@ Public Class FormGestionRepuestos
             Return
         End Try
 
-        ' Confirmación personalizada (negro / texto blanco / botones naranjos)
         Dim confirmForm As New Form With {
             .Text = "Confirmar eliminación",
             .Size = New Size(420, 180),
@@ -307,7 +288,6 @@ Public Class FormGestionRepuestos
         End If
     End Sub
 
-    ' ---------- VOLVER ----------
     Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
         If MainMenuInstance IsNot Nothing AndAlso Not MainMenuInstance.IsDisposed Then
             MainMenuInstance.Show()
@@ -318,7 +298,6 @@ Public Class FormGestionRepuestos
         Me.Close()
     End Sub
 
-    ' ---------- HOVER (otros botones) ----------
     Private Sub Boton_MouseEnter(sender As Object, e As EventArgs) Handles btnBuscar.MouseEnter, btnVisualizar.MouseEnter, btnAgregar.MouseEnter, btnModificar.MouseEnter, btnEliminar.MouseEnter, btnVolver.MouseEnter
         CType(sender, Button).BackColor = Color.Orange
     End Sub
@@ -326,4 +305,7 @@ Public Class FormGestionRepuestos
         CType(sender, Button).BackColor = Color.Black
     End Sub
 
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
+    End Sub
 End Class

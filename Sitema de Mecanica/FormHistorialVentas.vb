@@ -5,13 +5,11 @@ Public Class FormHistorialVentas
     Private Sub FormHistorialVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.StartPosition = FormStartPosition.CenterScreen
 
-        ' Configurar DateTimePickers (formato y valores por defecto)
         dtpDesde.Format = DateTimePickerFormat.Short
         dtpHasta.Format = DateTimePickerFormat.Short
         dtpHasta.Value = DateTime.Now.Date
-        dtpDesde.Value = DateTime.Now.Date.AddMonths(-1) ' por defecto último mes
+        dtpDesde.Value = DateTime.Now.Date.AddMonths(-1)
 
-        ' Inicialmente el filtro por fecha está desactivado
         chkFiltrarFecha.Checked = False
         dtpDesde.Enabled = False
         dtpHasta.Enabled = False
@@ -41,16 +39,14 @@ Public Class FormHistorialVentas
                 Dim cmd As New MySqlCommand()
                 cmd.Connection = conn
 
-                ' FILTRO POR RUT (flexible: permite coincidencia parcial)
                 If txtRut.Text.Trim() <> "" Then
                     sql &= " AND Cliente LIKE @rut"
                     cmd.Parameters.AddWithValue("@rut", "%" & txtRut.Text.Trim() & "%")
                 End If
 
-                ' FILTRO POR FECHAS si está activado
                 If chkFiltrarFecha.Checked Then
                     sql &= " AND FechaVenta BETWEEN @desde AND @hasta"
-                    ' Aseguramos que pasamos solo la fecha (sin hora)
+
                     cmd.Parameters.Add("@desde", MySqlDbType.Date).Value = dtpDesde.Value.Date
                     cmd.Parameters.Add("@hasta", MySqlDbType.Date).Value = dtpHasta.Value.Date
                 End If
@@ -91,4 +87,7 @@ Public Class FormHistorialVentas
         Me.Close()
     End Sub
 
+    Private Sub txtRut_TextChanged(sender As Object, e As EventArgs) Handles txtRut.TextChanged
+
+    End Sub
 End Class

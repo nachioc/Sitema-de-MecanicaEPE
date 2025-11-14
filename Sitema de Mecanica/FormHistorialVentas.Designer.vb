@@ -41,11 +41,10 @@ Partial Class FormHistorialVentas
         ' 
         dgvHistorial.BackgroundColor = SystemColors.ActiveCaptionText
         dgvHistorial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvHistorial.Location = New Point(131, 127)
-        dgvHistorial.Margin = New Padding(3, 2, 3, 2)
+        dgvHistorial.Location = New Point(150, 169)
         dgvHistorial.Name = "dgvHistorial"
         dgvHistorial.RowHeadersWidth = 51
-        dgvHistorial.Size = New Size(657, 272)
+        dgvHistorial.Size = New Size(751, 363)
         dgvHistorial.TabIndex = 10
         ' 
         ' Panel4
@@ -53,10 +52,9 @@ Partial Class FormHistorialVentas
         Panel4.BackColor = Color.FromArgb(CByte(255), CByte(128), CByte(0))
         Panel4.Controls.Add(Label12)
         Panel4.ForeColor = SystemColors.ControlText
-        Panel4.Location = New Point(67, 11)
-        Panel4.Margin = New Padding(3, 2, 3, 2)
+        Panel4.Location = New Point(77, 15)
         Panel4.Name = "Panel4"
-        Panel4.Size = New Size(667, 50)
+        Panel4.Size = New Size(762, 67)
         Panel4.TabIndex = 19
         ' 
         ' Label12
@@ -65,27 +63,27 @@ Partial Class FormHistorialVentas
         Label12.BackColor = Color.FromArgb(CByte(255), CByte(128), CByte(0))
         Label12.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label12.ForeColor = SystemColors.ButtonFace
-        Label12.Location = New Point(213, 9)
+        Label12.Location = New Point(243, 12)
         Label12.Name = "Label12"
-        Label12.Size = New Size(228, 32)
+        Label12.Size = New Size(283, 41)
         Label12.TabIndex = 10
         Label12.Text = "Historial de Ventas"
         ' 
         ' txtRut
         ' 
-        txtRut.Location = New Point(12, 144)
-        txtRut.Margin = New Padding(3, 2, 3, 2)
+        txtRut.Location = New Point(14, 192)
         txtRut.Name = "txtRut"
-        txtRut.Size = New Size(113, 23)
+        txtRut.Size = New Size(129, 27)
         txtRut.TabIndex = 24
         ' 
         ' dtpDesde
         ' 
         dtpDesde.CalendarFont = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         dtpDesde.Format = DateTimePickerFormat.Short
-        dtpDesde.Location = New Point(12, 206)
+        dtpDesde.Location = New Point(14, 275)
+        dtpDesde.Margin = New Padding(3, 4, 3, 4)
         dtpDesde.Name = "dtpDesde"
-        dtpDesde.Size = New Size(113, 23)
+        dtpDesde.Size = New Size(129, 27)
         dtpDesde.TabIndex = 25
         ' 
         ' btnVolver
@@ -93,9 +91,10 @@ Partial Class FormHistorialVentas
         btnVolver.BackColor = SystemColors.ActiveCaptionText
         btnVolver.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnVolver.ForeColor = SystemColors.ButtonHighlight
-        btnVolver.Location = New Point(694, 404)
+        btnVolver.Location = New Point(793, 539)
+        btnVolver.Margin = New Padding(3, 4, 3, 4)
         btnVolver.Name = "btnVolver"
-        btnVolver.Size = New Size(94, 34)
+        btnVolver.Size = New Size(107, 45)
         btnVolver.TabIndex = 34
         btnVolver.Text = "Volver"
         btnVolver.UseVisualStyleBackColor = False
@@ -103,9 +102,10 @@ Partial Class FormHistorialVentas
         ' dtpHasta
         ' 
         dtpHasta.Format = DateTimePickerFormat.Short
-        dtpHasta.Location = New Point(12, 235)
+        dtpHasta.Location = New Point(14, 313)
+        dtpHasta.Margin = New Padding(3, 4, 3, 4)
         dtpHasta.Name = "dtpHasta"
-        dtpHasta.Size = New Size(113, 23)
+        dtpHasta.Size = New Size(129, 27)
         dtpHasta.TabIndex = 35
         ' 
         ' chkFiltrarFecha
@@ -113,9 +113,10 @@ Partial Class FormHistorialVentas
         chkFiltrarFecha.AutoSize = True
         chkFiltrarFecha.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         chkFiltrarFecha.ForeColor = SystemColors.ButtonHighlight
-        chkFiltrarFecha.Location = New Point(12, 181)
+        chkFiltrarFecha.Location = New Point(14, 241)
+        chkFiltrarFecha.Margin = New Padding(3, 4, 3, 4)
         chkFiltrarFecha.Name = "chkFiltrarFecha"
-        chkFiltrarFecha.Size = New Size(94, 19)
+        chkFiltrarFecha.Size = New Size(117, 24)
         chkFiltrarFecha.TabIndex = 36
         chkFiltrarFecha.Text = "Filtrar Fecha"
         chkFiltrarFecha.UseVisualStyleBackColor = True
@@ -125,9 +126,9 @@ Partial Class FormHistorialVentas
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label4.ForeColor = Color.Snow
-        Label4.Location = New Point(12, 127)
+        Label4.Location = New Point(14, 169)
         Label4.Name = "Label4"
-        Label4.Size = New Size(72, 15)
+        Label4.Size = New Size(90, 20)
         Label4.TabIndex = 37
         Label4.Text = "Rut Cliente:"
         ' 
@@ -136,9 +137,10 @@ Partial Class FormHistorialVentas
         btnBuscar.BackColor = SystemColors.ActiveCaptionText
         btnBuscar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnBuscar.ForeColor = SystemColors.ButtonHighlight
-        btnBuscar.Location = New Point(22, 277)
+        btnBuscar.Location = New Point(25, 369)
+        btnBuscar.Margin = New Padding(3, 4, 3, 4)
         btnBuscar.Name = "btnBuscar"
-        btnBuscar.Size = New Size(72, 32)
+        btnBuscar.Size = New Size(82, 43)
         btnBuscar.TabIndex = 38
         btnBuscar.Text = "Buscar"
         btnBuscar.UseVisualStyleBackColor = False
@@ -148,19 +150,20 @@ Partial Class FormHistorialVentas
         btnVerTodo.BackColor = SystemColors.ActiveCaptionText
         btnVerTodo.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnVerTodo.ForeColor = SystemColors.ButtonHighlight
-        btnVerTodo.Location = New Point(22, 315)
+        btnVerTodo.Location = New Point(25, 420)
+        btnVerTodo.Margin = New Padding(3, 4, 3, 4)
         btnVerTodo.Name = "btnVerTodo"
-        btnVerTodo.Size = New Size(72, 32)
+        btnVerTodo.Size = New Size(82, 43)
         btnVerTodo.TabIndex = 39
         btnVerTodo.Text = "Visualizar"
         btnVerTodo.UseVisualStyleBackColor = False
         ' 
         ' FormHistorialVentas
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ActiveCaptionText
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(914, 600)
         Controls.Add(btnVerTodo)
         Controls.Add(btnBuscar)
         Controls.Add(Label4)
@@ -171,6 +174,7 @@ Partial Class FormHistorialVentas
         Controls.Add(txtRut)
         Controls.Add(Panel4)
         Controls.Add(dgvHistorial)
+        Margin = New Padding(3, 4, 3, 4)
         Name = "FormHistorialVentas"
         StartPosition = FormStartPosition.CenterScreen
         Text = "FormHistorialVentas"

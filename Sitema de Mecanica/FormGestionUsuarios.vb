@@ -11,7 +11,6 @@ Public Class FormGestionUsuarios
     Private Sub FormGestionUsuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.StartPosition = FormStartPosition.CenterScreen
 
-        ' Solo Administrador y Gerente pueden entrar
         If UsuarioTipoActual <> "Administrador" AndAlso UsuarioTipoActual <> "Gerente" Then
             MessageBox.Show("No tiene permisos para acceder a esta sección.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Close()
@@ -22,17 +21,14 @@ Public Class FormGestionUsuarios
             Return
         End If
 
-        ' Llenar roles
         cboTipo.Items.Clear()
         cboTipo.Items.AddRange(New String() {"Vendedor", "Administrador", "Mecánico", "Aseguradora", "Analista", "Gerente"})
 
         MostrarUsuarios()
 
-        ' Al iniciar, ocultamos todo hasta que se elija un modo
         OcultarCampos()
     End Sub
 
-    ' ========= CONTROL DE VISIBILIDAD SEGÚN OPCIÓN =========
     Private Sub OcultarCampos()
         txtRut.Visible = False
         txtCorreo.Visible = False
@@ -88,8 +84,6 @@ Public Class FormGestionUsuarios
         txtRut.Visible = True
         btnEliminar.Visible = True
     End Sub
-
-    ' ========= RADIOBUTTONS =========
     Private Sub rdbIngresar_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnIngresarUsuario.CheckedChanged
         If rbtnIngresarUsuario.Checked Then
             MostrarCamposIngreso()
@@ -108,7 +102,6 @@ Public Class FormGestionUsuarios
         End If
     End Sub
 
-    ' ========= MOSTRAR USUARIOS =========
     Private Sub MostrarUsuarios()
         Using conn As MySqlConnection = ObtenerConexion()
             Dim sql As String = "SELECT Rut, Correo, `Contraseña`, Tipo FROM usuarios"
@@ -119,7 +112,6 @@ Public Class FormGestionUsuarios
         End Using
     End Sub
 
-    ' ========= BUSCAR =========
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Using conn As MySqlConnection = ObtenerConexion()
             Dim sql As String = "SELECT * FROM usuarios WHERE Rut = @rut"
@@ -136,8 +128,6 @@ Public Class FormGestionUsuarios
     Private Sub btnVisualizar_Click(sender As Object, e As EventArgs) Handles btnVisualizar.Click
         MostrarUsuarios()
     End Sub
-
-    ' ========= INGRESAR =========
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         If String.IsNullOrWhiteSpace(txtRut.Text) OrElse String.IsNullOrWhiteSpace(txtCorreo.Text) OrElse String.IsNullOrWhiteSpace(txtContrasena.Text) OrElse cboTipo.SelectedIndex = -1 Then
             MessageBox.Show("Complete todos los campos antes de guardar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -163,8 +153,6 @@ Public Class FormGestionUsuarios
             End Try
         End Using
     End Sub
-
-    ' ========= MODIFICAR =========
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
 
         If String.IsNullOrWhiteSpace(txtRut.Text) Then
@@ -185,7 +173,7 @@ Public Class FormGestionUsuarios
             Dim cmd As New MySqlCommand(sql, conn)
             cmd.Parameters.AddWithValue("@rut", txtRut.Text.Trim())
             cmd.Parameters.AddWithValue("@correo", txtCorreo.Text.Trim())
-            cmd.Parameters.AddWithValue("@pass", txtContrasena.Text.Trim())  ' ← AHORA SE MODIFICA SIEMPRE
+            cmd.Parameters.AddWithValue("@pass", txtContrasena.Text.Trim())
             cmd.Parameters.AddWithValue("@tipo", cboTipo.SelectedItem.ToString())
 
             Try
@@ -202,15 +190,12 @@ Public Class FormGestionUsuarios
 
     End Sub
 
-
-    ' ========= ELIMINAR =========
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         If String.IsNullOrWhiteSpace(txtRut.Text) Then
             MessageBox.Show("Ingrese el RUT del usuario a eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        ' Buscar el usuario
         Dim correoUsuario As String = ""
         Using conn As MySqlConnection = ObtenerConexion()
             conn.Open()
@@ -228,7 +213,6 @@ Public Class FormGestionUsuarios
             reader.Close()
         End Using
 
-        ' Crear ventana de confirmación personalizada
         Dim confirmForm As New Form With {
             .Text = "Confirmar eliminación",
             .Size = New Size(400, 200),
@@ -293,7 +277,6 @@ Public Class FormGestionUsuarios
         End If
     End Sub
 
-    ' ========= LIMPIAR =========
     Private Sub LimpiarCampos()
         txtRut.Clear()
         txtCorreo.Clear()
@@ -301,7 +284,6 @@ Public Class FormGestionUsuarios
         cboTipo.SelectedIndex = -1
     End Sub
 
-    ' ========= VOLVER =========
     Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
         If MainMenuInstance IsNot Nothing AndAlso Not MainMenuInstance.IsDisposed Then
             MainMenuInstance.Show()
@@ -312,7 +294,7 @@ Public Class FormGestionUsuarios
         Me.Close()
     End Sub
 
-    ' ========= EFECTO HOVER =========
+
     Private Sub Boton_MouseEnter(sender As Object, e As EventArgs) Handles btnBuscar.MouseEnter, btnEliminar.MouseEnter, btnGuardar.MouseEnter, btnModificar.MouseEnter, btnVisualizar.MouseEnter, btnVolver.MouseEnter
         CType(sender, Button).BackColor = Color.Orange
     End Sub
